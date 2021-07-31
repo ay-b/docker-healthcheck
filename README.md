@@ -3,7 +3,7 @@
 This program intended to replace `curl` at work as a health-check for the certain docker container like:
 ```yaml
     healthcheck:
-      test: healthy --url http://localhost:8080
+      test: healthcheck --url http://localhost:8080
       interval: 10s
       timeout: 5s
       retries: 6
@@ -13,14 +13,14 @@ This program intended to replace `curl` at work as a health-check for the certai
 
 Because there are some cases when you can't or don't want to have `curl` in your deployment.  
 Having web-services in containers often require checking they're alive and didn't crash for any reason.
-`Healthy` is a 15-lines code that compiles to a relatively small binary that does a single job: query an url and return an error code.
+`Healthcheck` is a 15-lines code that compiles to a relatively small binary that does a single job: query an url and return an error code.
 
 So instead of having something like  
 `apt update && apt install curl no-install-recommends -y && apt clean && rm -rf /var/lib/apt/lists/*`
-You just copy compiled binary to the container and call it from healthcheck.
+You just copy compiled binary to the container and call it from compose healthcheck. Especially useful in pipelines that being run a thousand times a day to save some time and traffic.
 # How?
 
-Just `healthy --code "20\d" --url http://example.com:80`  
+Just `healthcheck --code "20\d" --url http://example.com:80`  
 Or, if used as a healthcheck for docker, just run without args to check `http://localhost:8080` for code `200` (I'm assuming here that you have `8080` as your service port open).  
 
 ### Legit args
