@@ -1,0 +1,8 @@
+FROM nginx:latest
+
+COPY healthcheck /healthcheck
+
+EXPOSE 80
+
+HEALTHCHECK --interval=10s --timeout=2s --start-period=5s \
+  CMD /healthcheck --url "http://localhost" --code "[2,3]\d\d"

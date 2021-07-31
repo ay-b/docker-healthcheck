@@ -23,6 +23,10 @@ You just copy compiled binary to the container and call it from compose healthch
 Just `healthcheck --code "20\d" --url http://example.com:80`  
 Or, if used as a healthcheck for docker, just run without args to check `http://localhost:8080` for code `200` (I'm assuming here that you have `8080` as your service port open).  
 
+### Dockerfile.example
+Here is an example how to embed `healthcheck` to your Dockerfile.  
+Example is based on the standard Nginx container. Note the `HEALTHCHECK` part. [Idented CMD](https://docs.docker.com/engine/reference/builder/#healthcheck) is a mandatory to avoid overriding the "root" CMD.
+
 ### Legit args
 `--code` accepts integers and regexps in quotes, e.g. "[2,3]\d\d" will accept all 2xx and 3xx codes.  
 `--url` accepts url with protocol and port (optionally), e.g. `http://example.com:8080`, `https://domain.com:8443`
