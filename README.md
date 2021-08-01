@@ -29,7 +29,7 @@ Here is an example how to embed `healthcheck` to your Dockerfile.
 Example is based on the standard Nginx container. Note the `HEALTHCHECK` part. [Idented CMD](https://docs.docker.com/engine/reference/builder/#healthcheck) is a mandatory to avoid overriding the "root" CMD.
 
 ### Legit args
-`--code string` This should be a regexp in "" or clear integer of the expected return code e.g., "[2,3]0\d" will accept all 2xx and 3xx codes. Type "200" to expect a strict code (default "200")  
+`--code string` This should be a regexp in "" or clear integer of the expected return code e.g., `"[2,3]0\d"` will accept all 2xx and 3xx codes. Type `"200"` to expect a strict code (default "200")  
 `--url string` This should be an URL. Can contain a path e.g., 'http://localhost:8080/x/app'. (default "http://localhost")
 
 ## Compilation advisory
