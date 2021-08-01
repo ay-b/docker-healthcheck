@@ -9,23 +9,24 @@ import (
 )
 
 func main() {
-	defaultUrl := "http://localhost:8080"
+	defaultUrl := "http://localhost"
 	defaultCode := "200"
 
-	url := flag.String("url", defaultUrl, "This should be an URL")
-	code := flag.String("code", defaultCode, "This should be a regexp in \"\" or clear integer of expected return code, e.g. \"20\\d\"")
+	url := flag.String("url", defaultUrl, "This should be an URL. Can contain a path like 'http://localhost:8080/x/app'.")
+	code := flag.String("code", defaultCode, "This should be a regexp in \"\" or clear integer of expected return code, e.g. \"[2,3]0\\d\", \"200\"")
 
 	flag.Parse()
+	log.Printf("[ INFO ] Checking %s for code %s", *url, *code)
 	resp, err := http.Get(*url)
 	if err != nil {
-		log.Fatalln("[ CHECK FAILED ] ",err)
+		log.Fatalf("[ FATAL ] Check failed: %s", err)
 	}
 
 	status, err := regexp.MatchString(*code, resp.Status)
 	if status != true {
-		log.Printf("[ CHECK FAILED ] %s", resp.Status)
+		log.Printf("[ FATAL ] Check failed: %s %s", *url, resp.Status)
 		os.Exit(1)
 	}
-	log.Printf("[ CHECK OK ] %s", resp.Status)
+	log.Printf("[ INFO ] Check passed: %s %s", *url, resp.Status)
 
 }
