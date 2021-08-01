@@ -38,4 +38,6 @@ Use then `upx --brute healthcheck` to make it 3 times smaller. Note, that unpack
 Using `upx -9 healthcheck` will leave a little bigger binary but startup will be about 55ms.
 [Source for these tricks](https://stackoverflow.com/questions/4523920/how-do-i-update-a-formula-with-homebrew)
 
-The binary added to the repo just for convenience.
+
+# Download binary
+Download pre-compiled binary from the [Releases page](https://github.com/ay-b/docker-healthcheck/releases)
